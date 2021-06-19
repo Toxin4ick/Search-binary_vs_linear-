@@ -12,24 +12,31 @@ function binarySearch($arr, $find,$start=0,$end=null)
         $end=count($arr)-1;//если end не объявлен то его значение будет равно последнему индексу массива
     }
 
-    if ($start>$end)
-    {
-        return ('Вуа вуа вуа');
-    }
 
-    $halfIndex =(int)(($start +$end)/2);  //Находим среднее значение
+    while ($start<$end){
+        $halfIndex=(int)(($start+$end)/2);
+        if($arr[$halfIndex] == $find) {
 
-    if($arr[$halfIndex]!==$find){
-        if($arr[$halfIndex]<$find){
+            return $arr[$halfIndex];
+
+        }
+        if ($find < $arr[$halfIndex]) {
+
+            $end = $halfIndex -1;
+
+        }else{
             $start=$halfIndex+1;
         }
-        else
-        {
-            $end = $halfIndex -1;
-        }
-        return binarySearch($arr,$find,$start,$end);
     }
-    return $arr[$halfIndex];
+    try {
+        if ($arr[$halfIndex]!=$find)
+        {
+            throw new LogicException("элемент не найден");
+        }
+    }catch (Exception $e){
+        echo $e-> getMessage();
+        die;
+    }
 }
 function linearSearch($arr,$find)
 {
@@ -40,12 +47,12 @@ function linearSearch($arr,$find)
     }
 }
 $timeStart = microtime(true);
-echo binarySearch($arr,$find);
+echo "Бинарный поиск нашёл число ".binarySearch($arr,$find);
 $timeEnd = microtime(true);
 $time = $timeEnd - $timeStart;
-echo 'Затрачено секунд: ' . $time."<br>";
+echo ' За ' . $time." Времени<br>";
 $timeStart = microtime(true);
-echo linearSearch($arr,$find);
+echo "Линейный поиск нашёл число ".linearSearch($arr,$find);
 $timeEnd = microtime(true);
 $time = $timeEnd - $timeStart;
-echo 'Затрачено секунд: ' . $time;
+echo ' За ' . $time." Времени<br>";
