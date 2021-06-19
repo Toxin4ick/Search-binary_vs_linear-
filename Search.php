@@ -2,7 +2,7 @@
 $arr=[];
 for($i=0;$i<1000;$i++)
 {
-    $arr[$i]=$i;
+    $arr[$i]=rand(1,10000);
 }
 $find=960;
 function binarySearch($arr, $find,$start=0,$end=null)
