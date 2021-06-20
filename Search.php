@@ -2,19 +2,21 @@
 $arr=[];
 for($i=0;$i<1000;$i++)
 {
-    $arr[$i]=rand(1,10000);
+    $arr[$i]=rand(1,1000);
 }
-$find=960;
+$arr2=[0,1,2];
+$find=1;
 function binarySearch($arr, $find,$start=0,$end=null)
 {
+    sort($arr);
     if ($end===null)
     {
         $end=count($arr)-1;//если end не объявлен то его значение будет равно последнему индексу массива
     }
 
 
-    while ($start<$end){
-        $halfIndex=(int)(($start+$end)/2);
+    while ($start<=$end){
+        $halfIndex=floor(($start+$end)/2);
         if($arr[$halfIndex] == $find) {
 
             return $arr[$halfIndex];
@@ -37,6 +39,7 @@ function binarySearch($arr, $find,$start=0,$end=null)
         echo $e-> getMessage();
         die;
     }
+
 }
 function linearSearch($arr,$find)
 {
@@ -47,12 +50,12 @@ function linearSearch($arr,$find)
     }
 }
 $timeStart = microtime(true);
-echo "Бинарный поиск нашёл число ".binarySearch($arr,$find);
+echo "Бинарный поиск нашёл число ".binarySearch($arr,$arr2[1]);
 $timeEnd = microtime(true);
 $time = $timeEnd - $timeStart;
 echo ' За ' . $time." Времени<br>";
 $timeStart = microtime(true);
-echo "Линейный поиск нашёл число ".linearSearch($arr,$find);
+echo "Линейный поиск нашёл число ".linearSearch($arr,$arr2[1]);
 $timeEnd = microtime(true);
 $time = $timeEnd - $timeStart;
 echo ' За ' . $time." Времени<br>";
